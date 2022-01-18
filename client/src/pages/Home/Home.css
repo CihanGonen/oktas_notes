@@ -1,0 +1,15 @@
+.home-container {
+  display: flex;
+  height: 90vh;
+}
+.home-left {
+  flex: 1;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.home-main {
+  padding-top: 1rem;
+}

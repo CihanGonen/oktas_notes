@@ -1,0 +1,83 @@
+.add-file {
+  width: 20%;
+  height: 100vh;
+  border-left: 2px solid #bcbcbc;
+  background-color: white;
+  padding: 1rem 0;
+}
+.add-file .my-hr {
+  width: 50%;
+  height: 5px;
+  background-color: #404040;
+  margin: auto;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+}
+.folder-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.klasorForm form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.eklenecek-klasor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.eklenecek-klasor p {
+  font-size: 18px;
+}
+.btn-foldercard {
+  background-color: transparent;
+  margin: 0;
+  border: none;
+  outline: none;
+  width: 70%;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.btn-klasor {
+  padding: 0.2rem 1rem;
+}
+.file-upload-label {
+  width: 60%;
+  margin: 0 auto;
+  border-bottom: 2px solid #bcbcbc;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.file-upload-label p {
+  font-size: 12px;
+  vertical-align: bottom;
+}
+.file-upload-label img {
+  vertical-align: bottom;
+  float: right;
+}
+.btn-upload {
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 0.2rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.progress-wrapper {
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 60%;
+  color: black;
+  border: 1px solid #0186f7;
+  border-radius: 20px;
+}

@@ -1,26 +1,17 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import "./Home.css";
 export default function Home() {
-  const { user, dispatch } = useAuthContext();
-  const navigate = useNavigate();
-
-  const logout = async (e) => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      dispatch({ type: "LOGOUT" });
-      navigate("/signin");
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
   return (
-    <div>
-      {user && (
-        <button className="btn" onClick={logout}>
-          Log out
-        </button>
-      )}
+    <div className="cardhome">
+      <label>not ekle : </label>
+      <div>
+        <textarea className="textarea" />
+      </div>
+      <input className="button" type="submit" value="Submit" />
+      <div class="click">
+        <span class="fa fa-star-o"></span>
+        <div class="ring"></div>
+        <div class="ring2"></div>
+      </div>
     </div>
   );
 }

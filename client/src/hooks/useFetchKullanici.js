@@ -3,7 +3,7 @@ export const useFetchKullanici = () => {
     if (kullanici_id) {
       try {
         const res = await fetch(
-          `http://localhost:5000/kullanici/${kullanici_id}`,
+          `http://localhost:3000/kullanici/${kullanici_id}`,
           {
             method: "GET",
             headers: {

@@ -34,7 +34,7 @@ export default function SigninSignupRight() {
     }
     const signupValues = { email, password };
     try {
-      fetch("http://localhost:5000/signup", {
+      fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

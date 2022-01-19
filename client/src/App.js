@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
+import Cards from "./pages/Cards/Cards";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import Signin from "./pages/Signin/Signin";
@@ -13,7 +14,7 @@ function App() {
     const token = localStorage.token;
     if (token) {
       try {
-        const res = await fetch("http://localhost:5000/verifyUser", {
+        const res = await fetch("http://localhost:3000/verifyUser", {
           method: "POST",
           headers: { token },
         });
@@ -50,6 +51,7 @@ function App() {
               path="/signin"
               element={user ? <Navigate replace to="/" /> : <Signin />}
             />
+             <Route  path="/Cards" element={<Cards/>} />
           </Routes>
         </BrowserRouter>
       )}

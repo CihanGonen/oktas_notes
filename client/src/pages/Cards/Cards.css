@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Raleway&display=swap');
+
+body {
+  background-color: #5c8062;
+}
+
+.card{
+  background-color: #ffebb3;
+  width: 30rem;
+  height: auto;
+  padding: 2%;
+  margin: 5rem auto;
+  border-radius: 1rem;
+  box-shadow: 0 0 5rem rgb(0 0 0 / 30%);
+  transition: 0.4s;
+}
+
+.image{
+  background-image: url("https://pixfeeds.com/images/8/326781/1200-511723314-cups-tarot-card.jpg");
+  border-radius: 1rem 1rem 0 0;
+  height: 10rem;
+  background-color: #000;
+  background-size: 120%;
+  background-position: center;
+}
+
+.card:hover{
+  background-color: #ffd86b;
+  transform: translateY(-50px) rotate(-5deg);
+  box-shadow: 0 0 5rem rgba(0,0,0,0.5);
+}
+
+.content {
+  padding: 0 2rem;
+}
+
+h1{
+  font-family: 'Libre Baskerville';
+}
+
+p{
+  font-family: 'Raleway';
+}
+.cards{
+}

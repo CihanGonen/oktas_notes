@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
-import Cards from "./pages/Cards/Cards";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import Signin from "./pages/Signin/Signin";
 import { useEffect } from "react";
+
+import "./App.css";
 
 function App() {
   const { user, authIsReady, dispatch } = useAuthContext();
@@ -54,7 +55,6 @@ function App() {
               path="/signin"
               element={user ? <Navigate replace to="/" /> : <Signin />}
             />
-            <Route path="/Cards" element={<Cards />} />
           </Routes>
         </BrowserRouter>
       )}

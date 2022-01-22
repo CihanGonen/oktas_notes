@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Raleway&display=swap");
 
-
-.card{
+.card {
   background-color: #ffebb3;
   width: 30rem;
   height: auto;
@@ -12,22 +11,20 @@
   transition: 0.4s;
 }
 
-.card:hover{
+.card:hover {
   background-color: #ffd86b;
   transform: translateY(-50px) rotate(-5deg);
-  box-shadow: 0 0 5rem rgba(0,0,0,0.5);
+  box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 
 .content {
   padding: 0 2rem;
 }
 
-h1{
-  font-family: 'Libre Baskerville';
+h1 {
+  font-family: "Libre Baskerville";
 }
 
-p{
-  font-family: 'Raleway';
-}
-.cards{
+p {
+  font-family: "Raleway";
 }

@@ -2,17 +2,21 @@
 
 .home-container {
   display: flex;
-  height: 90vh;
+  height: 100%;
   font-family: "Open Sans", sans-serif;
   background-color: #027ff7;
 }
 .home-left {
   flex: 1;
-  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
+}
+.home-right {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
 }
 .home-main {
   padding-top: 1rem;
@@ -139,21 +143,6 @@ label {
   font-family: "Libre Baskerville";
   font-size: 20px;
 }
-.home-container {
-  display: flex;
-  height: 100vh;
-}
-.home-leftt {
-  flex: 1;
-  height: 100%;
-  border-radius: 0 5% 5% 0;
-}
-.home-right {
-  flex: 1;
-  height: 100%;
-  overflow: auto;
-}
-
 .card {
   background-color: #ded2af;
   width: 30rem;
@@ -181,6 +170,4 @@ h1 {
 
 p {
   font-family: "Raleway";
-}
-.cards {
 }

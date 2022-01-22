@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Raleway&display=swap');
-
+body {
+  background-color: #027ff7;
+}
 .home-container {
   display: flex;
   height: 90vh;
@@ -14,6 +16,7 @@
   align-items: center;
   height: 100%;
   
+  
 }
 .home-main {
   padding-top: 1rem;
@@ -21,27 +24,26 @@
 .textarea {
   margin-top: 5%;
   width: 100%;
-  height: 500px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #79799363;
   border-radius: 4px;
-  background-color: #ffffff;
+  border-color: #000;
+  background-color: #ffffff00;
   font-size: 16px;
   resize: none;
-  border-style: double;
-  
+
 }
 .cardhome{
   width: 30rem;
-  height: auto;
+  height: 30rem;
   padding: 2%;
-  margin: 5rem auto;
+  margin: 2rem 3rem;
   box-sizing: border-box;
   border: 1px solid #c8c8f363;
   border-radius: 1rem;
-  background-color: #ffffffda;
+  background-color:#ffebb3;
   color: #1d191a;
+  background-image: url('https://image.freepik.com/free-vector/grunge-paper-texture-background_1048-12629.jpg');
 }
 .button {
   background-color: #4CAF50;
@@ -139,4 +141,57 @@ span:active {
 label{
   font-family: 'Libre Baskerville';
   font-size: 20px;
+}
+.home-container{
+  display:flex;
+  height:100vh;
+}
+.home-leftt{
+  flex:1;
+  height:100%;
+  border-radius:0 5% 5% 0;
+}
+.home-right{
+  flex:1;
+  height:100%;
+  overflow: auto;
+}
+
+.card{
+  background-color: #ded2af;
+  width: 30rem;
+  height: auto;
+  padding: 2%;
+  margin: 5rem auto;
+  border-radius: 1rem;
+  box-shadow: 0 0 5rem rgb(0 0 0 / 30%);
+  transition: 0.4s;
+}
+
+.image{
+  border-radius: 1rem 1rem 0 0;
+  height: 10rem;
+  background-color: #000;
+  background-size: 120%;
+  background-position: center;
+}
+
+.card:hover{
+  background-color: #c6b381;
+  transform: translateY(-50px) rotate(-5deg);
+  box-shadow: 0 0 5rem rgba(0,0,0,0.5);
+}
+
+.content {
+  padding: 0 2rem;
+}
+
+h1{
+  font-family: 'Libre Baskerville';
+}
+
+p{
+  font-family: 'Raleway';
+}
+.cards{
 }

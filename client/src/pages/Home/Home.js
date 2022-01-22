@@ -3,7 +3,7 @@ export default function Home() {
   return (
     <div className="home-container">
     <div className="home-left">
-    <div className="cardhome img">
+    <div className="cardhome">
       <label>not ekle : </label>
       <div>
         <textarea className="textarea" rows="18"/>

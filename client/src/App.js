@@ -14,7 +14,7 @@ function App() {
     const token = localStorage.token;
     if (token) {
       try {
-        const res = await fetch("http://localhost:3000/verifyUser", {
+        const res = await fetch("http://localhost:5000/verifyUser", {
           method: "POST",
           headers: { token },
         });
@@ -42,7 +42,10 @@ function App() {
       {authIsReady && (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={!user ? <Navigate replace to="/signin" /> : <Home />}
+            />
             <Route
               path="/signup"
               element={user ? <Navigate replace to="/" /> : <Signup />}
@@ -51,7 +54,7 @@ function App() {
               path="/signin"
               element={user ? <Navigate replace to="/" /> : <Signin />}
             />
-             <Route  path="/Cards" element={<Cards/>} />
+            <Route path="/Cards" element={<Cards />} />
           </Routes>
         </BrowserRouter>
       )}

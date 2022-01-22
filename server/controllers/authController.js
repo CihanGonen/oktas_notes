@@ -4,15 +4,16 @@ const jwtGenerator = require("../utils/jwtGenerator");
 
 const { createUserValidation } = require("../validation");
 
-module.exports.signup_post = async (req, res) => {
+module.exports.check_signup_post = async (req, res) => {
   //validate informations
   const { error } = createUserValidation(req.body);
 
   if (error) {
-    return res.status(400).send(error.details[0].message);
+    return res.json({ err: error.details[0].message });
   }
 
-  const { email, password } = req.body;
+  const { email } = req.body;
+
   try {
     // check if user exists (if exists throw err)
     const user = await pool.query("SELECT * FROM users WHERE email=$1", [
@@ -20,9 +21,18 @@ module.exports.signup_post = async (req, res) => {
     ]);
 
     if (user.rows.length !== 0) {
-      return res.status(401).json("Email already exists");
+      return res.json({ emailExists: true });
     }
 
+    res.status(201).json({ emailExists: false });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+};
+
+module.exports.signup_post = async (req, res) => {
+  const { email, password } = req.body;
+  try {
     // bcrypt the users passw
     const saltRound = 10;
     const salt = await bcrypt.genSalt(saltRound);
@@ -48,7 +58,7 @@ module.exports.signup_post = async (req, res) => {
   }
 };
 
-module.exports.login_post = async (req, res) => {
+module.exports.check_login_post = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -57,7 +67,7 @@ module.exports.login_post = async (req, res) => {
     ]);
 
     if (person.rows.length === 0) {
-      return res.status(401).json("Email veya Şifre Yanlış");
+      return res.status(401).json({ err: "Email or Pasword is Wrong" });
     }
 
     const validPassword = await bcrypt.compare(
@@ -66,8 +76,23 @@ module.exports.login_post = async (req, res) => {
     );
 
     if (!validPassword) {
-      return res.status(401).json("Email veya Şifre Yanlış");
+      return res.status(401).json({ err: "Email or Pasword is Wrong" });
     }
+
+    return res.json({ okey: true });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send("server error");
+  }
+};
+
+module.exports.login_post = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const person = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
 
     //create token
     const token = jwtGenerator(person.rows[0]);

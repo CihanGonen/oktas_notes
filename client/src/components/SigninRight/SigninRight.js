@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useVerifCode } from "../../hooks/useVerifCode";
 
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
@@ -12,12 +13,14 @@ export default function SigninSignupRight() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [verifCode, setVerifCode] = useState("");
 
   const [cancel, setCancel] = useState(false);
 
   const navigate = useNavigate();
 
   const { dispatch } = useAuthContext();
+  const { generateAndSendCode, isSent, setIsSent, sentCode } = useVerifCode();
 
   useEffect(() => {
     // unmount operations
@@ -26,8 +29,7 @@ export default function SigninSignupRight() {
     };
   }, []);
 
-  const onLoginSubmit = async (e) => {
-    e.preventDefault();
+  const onLoginSubmit = async () => {
     setLoginError("");
     if (!email || !password) {
       setLoginError("Lütfen tüm alanları doldurunuz");
@@ -35,7 +37,7 @@ export default function SigninSignupRight() {
     }
     const loginValues = { email, password };
     try {
-      fetch("http://localhost:3000/login", {
+      fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,41 +63,106 @@ export default function SigninSignupRight() {
     setEmail("");
   };
 
+  const checkInformations = async () => {
+    const signupValues = { email, password };
+    try {
+      let res = await fetch("http://localhost:5000/check_login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupValues),
+      });
+      let result = await res.json();
+      return result;
+    } catch (err) {
+      console.log("buradan yazıldı");
+      console.log(err.message);
+    }
+  };
+
+  const sendCode = async (e) => {
+    e.preventDefault();
+    setLoginError("");
+    if (!email || !password) {
+      setLoginError("Lütfen tüm alanları doldurunuz");
+      return;
+    }
+    let result = await checkInformations();
+    if (result.err) {
+      setLoginError(result.err);
+    } else if (result.okey === true) {
+      generateAndSendCode(email);
+    }
+  };
+
+  const checkCode = async (verifCode, displayName) => {
+    if (verifCode === sentCode) {
+      onLoginSubmit();
+    } else {
+      setLoginError("Wrong Code");
+      setIsSent(false);
+      navigate("/signin");
+    }
+  };
+
+  const handleCodeSubmit = (e) => {
+    e.preventDefault();
+    checkCode(verifCode);
+    setVerifCode("");
+  };
+
   return (
     <div className="sign-in-wrapper">
-      <div className="sign-in-sub-wrapper">
-        <h2 className="title">Giriş Yap</h2>
-        <div
-          className="cizgi"
-          style={{ background: "#00a2ff", width: "21%" }}
-        ></div>
-        <form onSubmit={onLoginSubmit}>
-          <FormInput
-            name="email"
-            type="email"
-            value={email}
-            handleChange={(e) => setEmail(e.target.value)}
-            label="Email"
-            required
-          />
-          <FormInput
-            name="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            label="Şifre"
-            required
-          />
+      {isSent ? (
+        <div className="code-form">
+          <form onSubmit={handleCodeSubmit}>
+            <FormInput
+              type="number"
+              name="verifcode"
+              value={verifCode}
+              handleChange={(e) => setVerifCode(e.target.value)}
+              label="Doğrulama Kodu"
+              required
+            />
+            <CustomButton type="submit">Onayla</CustomButton>
+          </form>
+        </div>
+      ) : (
+        <div className="sign-in-sub-wrapper">
+          <h2 className="title">Giriş Yap</h2>
+          <div
+            className="cizgi"
+            style={{ background: "#00a2ff", width: "21%" }}
+          ></div>
+          <form onSubmit={sendCode}>
+            <FormInput
+              name="email"
+              type="email"
+              value={email}
+              handleChange={(e) => setEmail(e.target.value)}
+              label="Email"
+              required
+            />
+            <FormInput
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              label="Şifre"
+              required
+            />
 
-          <CustomButton type="submit">GİRİŞ YAP</CustomButton>
+            <CustomButton type="submit">GİRİŞ YAP</CustomButton>
 
-          {loginError && (
-            <p style={{ marginTop: "1rem", color: "red", fontSize: "16px" }}>
-              {loginError}
-            </p>
-          )}
-        </form>
-      </div>
+            {loginError && (
+              <p style={{ marginTop: "1rem", color: "red", fontSize: "16px" }}>
+                {loginError}
+              </p>
+            )}
+          </form>
+        </div>
+      )}
     </div>
   );
 }

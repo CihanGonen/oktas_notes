@@ -33,7 +33,7 @@ export default function SigninSignupRight() {
     setSignupError("");
     const signupValues = { email, password };
     try {
-      fetch("http://localhost:3000/signup", {
+      fetch("http://localhost:5000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,14 +60,39 @@ export default function SigninSignupRight() {
     setPassword("");
   };
 
-  const sendCode = (e) => {
+  const checkInformations = async () => {
+    const signupValues = { email, password };
+    try {
+      let res = await fetch("http://localhost:5000/check_signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupValues),
+      });
+      let result = await res.json();
+      return result;
+    } catch (err) {
+      console.log("buradan yazıldı");
+      console.log(err.message);
+    }
+  };
+
+  const sendCode = async (e) => {
     e.preventDefault();
     setSignupError("");
     if (!email || !password) {
       setSignupError("Lütfen tüm alanları doldurunuz");
       return;
     }
-    generateAndSendCode(email);
+    let result = await checkInformations();
+    if (result.err) {
+      setSignupError(result.err);
+    } else if (result.emailExists === true) {
+      setSignupError("This email exists");
+    } else {
+      generateAndSendCode(email);
+    }
   };
 
   const checkCode = async (verifCode, displayName) => {

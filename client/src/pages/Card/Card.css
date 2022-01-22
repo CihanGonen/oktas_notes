@@ -3,28 +3,29 @@
 .card {
   background-color: #ffebb3;
   width: 30rem;
-  height: auto;
-  padding: 2%;
-  margin: 5rem auto;
+  height: 10rem;
+  padding: 3%;
+  margin: 1rem auto;
   border-radius: 1rem;
   box-shadow: 0 0 5rem rgb(0 0 0 / 30%);
   transition: 0.4s;
+  
 }
 
 .card:hover {
   background-color: #ffd86b;
-  transform: translateY(-50px) rotate(-5deg);
+  transform: translateY(-50px) rotate(-3deg);
   box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 
 .content {
-  padding: 0 2rem;
+  padding: 0rem;
 }
 
-h1 {
+h4 {
   font-family: "Libre Baskerville";
 }
 
-p {
+h6 {
   font-family: "Raleway";
 }

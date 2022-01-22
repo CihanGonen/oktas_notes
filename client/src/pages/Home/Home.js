@@ -1,7 +1,8 @@
 import "./Home.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { Link, useNavigate } from "react-router-dom";
-
+import FormInput from "../../components/FormInput/FormInput";
+import CustomButton from "../../components/CustomButton/CustomButton";
 import Card from "../Card/Card";
 
 export default function Home() {
@@ -22,22 +23,34 @@ export default function Home() {
   return (
     <div className="home-container">
       <div className="home-left">
-        <div className="cardhome">
+      {<div className="profile-card">
+      <form>
+           <FormInput placeholder="yeni şifre"/>
+            <FormInput placeholder="yeni şifre tekrar"/>
+            <CustomButton type="submit">Onayla</CustomButton>
+            <CustomButton type="submit">Hesabımı sil</CustomButton>
+          </form>
+          </div>
+          /*  <div className="cardhome">
           <button onClick={logout}>logout</button>
           <label>not ekle : </label>
           <div>
-            <textarea className="textarea" rows="18" />
+            <textarea className="textarea" rows="21" />
           </div>
-          <input className="button" type="submit" value="Submit" />
+          <CustomButton type="submit">Kaydet</CustomButton>
           <div className="click">
             <span className="fa fa-star-o"></span>
             <div className="ring"></div>
             <div className="ring2"></div>
           </div>
-        </div>
+        </div>*/}
       </div>
+  
       <div className="home-right">
         <div className="cards">
+          <Card />
+          <Card />
+          <Card />
           <Card />
           <Card />
           <Card />

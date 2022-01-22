@@ -3,14 +3,14 @@ export default function Card() {
   return (
     <div class="card">
       <div class="content">
-        <h1>Ace of Cups</h1>
-        <p>
+        <h4>Ace of Cups</h4>
+        <h6>
           The cup represents the vessel of your subconscious mind; the five
           streams are your five senses and the abundant emotion and intuition
           flowing from within you.
-        </p>
+        </h6>
         <a href="">Read full</a>
-        <h4 class="card-time">01.03.2022</h4>
+        <h6 class="card-time">01.03.2022</h6>
       </div>
     </div>
   );

@@ -1,16 +1,15 @@
-import SigninSignupLeft from '../../components/SigninSignupLeft/SigninSignupLeft';
-import SigninRight from '../../components/SigninRight/SigninRight';
+import SigninSignupLeft from "../../components/SigninSignupLeft/SigninSignupLeft";
+import SigninRight from "../../components/SigninRight/SigninRight";
 
-import './Signin.css';
+import "./Signin.css";
 
 export default function Signin() {
-  
-  const header='Tekrar Hoşgeldiniz'
+  const header = "Tekrar Hoşgeldiniz";
   const paragraphs = [
-    'Dijital varlıklarınızı güvenle saklayabilmek için en ideal bulut yedekleme platformu.',
-    'Şimdi giriş yapın ve dijital varlıklarınızı 9oktas farkıyla saklamaya devam edin.',
-    'Hesabınız yok mu ?'
-  ]
+    "Notlarınızı güvenle saklayabilmek için en ideal web sitesine gelmiş bulunmaktasınız.",
+    "Şimdi giriş yapın ve notlarınızı 9oktas farkıyla saklamaya devam edin.",
+    "Hesabınız yok mu ?",
+  ];
 
   return (
     <div className="sign-in-container">
@@ -18,13 +17,13 @@ export default function Signin() {
         <SigninSignupLeft
           header={header}
           paragraphs={paragraphs}
-          btnText='KAYIT OL'
-          btnLinksTo='signup'
+          btnText="KAYIT OL"
+          btnLinksTo="signup"
         />
       </div>
       <div className="sign-in-right">
         <SigninRight />
       </div>
     </div>
-  )
+  );
 }

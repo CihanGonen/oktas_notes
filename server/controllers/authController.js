@@ -2,7 +2,10 @@ const pool = require("../db/index");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 
-const { createUserValidation } = require("../validation");
+const {
+  createUserValidation,
+  changePasswordValidation,
+} = require("../validation");
 
 module.exports.check_signup_post = async (req, res) => {
   //validate informations
@@ -107,6 +110,61 @@ module.exports.login_post = async (req, res) => {
     console.log(err.message);
     return res.status(500).send("server error");
   }
+};
+
+module.exports.change_password_post = async (req, res) => {
+  const { email, oldPass, newPass } = req.body;
+  try {
+    const person = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    const validPassword = await bcrypt.compare(
+      oldPass,
+      person.rows[0].password
+    );
+
+    if (!validPassword) {
+      return res.status(401).json({ err: "Password is Wrong" });
+    }
+
+    const { error } = changePasswordValidation({ password: newPass });
+
+    if (error) {
+      return res.json({ err: error.details[0].message });
+    }
+
+    const saltRound = 10;
+    const salt = await bcrypt.genSalt(saltRound);
+    const bcryptPassword = await bcrypt.hash(newPass, salt);
+
+    const updatedPerson = await pool.query(
+      "UPDATE users SET password=$1 WHERE email=$2 RETURNING *",
+      [bcryptPassword, email]
+    );
+
+    return res.status(201).json({ updatedPerson: updatedPerson.rows[0] });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send("server error");
+  }
+};
+
+module.exports.account_delete = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const deletedNotes = await pool.query(
+      "DELETE FROM notes WHERE user_id=$1",
+      [userId]
+    );
+    const deleteUser = await pool.query("DELETE FROM users WHERE user_id=$1", [
+      userId,
+    ]);
+    return res.status(201).json({ okey: true });
+  } catch (err) {
+    console.log(err.message);
+  }
+  return;
 };
 
 module.exports.verifyUser_post = (req, res) => {

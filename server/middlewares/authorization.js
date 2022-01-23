@@ -9,12 +9,10 @@ module.exports = async (req, res, next) => {
     }
 
     const payload = jwt.verify(jwtToken, process.env.SECRET_TOKEN);
-
+    console.log(payload);
     req.user = {
-      kullanici_id: payload.kullanici_id,
-      name: payload.name,
-      baskanlik_id: payload.baskanlik_id,
-      yetki_id: payload.yetki_id,
+      user_id: payload.user_id,
+      email: payload.email,
     };
   } catch (err) {
     console.log(err.message);

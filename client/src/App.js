@@ -43,8 +43,14 @@ function App() {
       {authIsReady && (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-          
+            <Route
+              exact
+              path="/"
+              element={
+                !user ? <Navigate replace to="/signin" /> : <Home user={user} />
+              }
+            />
+
             <Route
               path="/signup"
               element={user ? <Navigate replace to="/" /> : <Signup />}

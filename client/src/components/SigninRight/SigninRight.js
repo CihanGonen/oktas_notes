@@ -14,6 +14,7 @@ export default function SigninSignupRight() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [verifCode, setVerifCode] = useState("");
+  const [pending, setPending] = useState(false);
 
   const [cancel, setCancel] = useState(false);
 
@@ -92,6 +93,7 @@ export default function SigninSignupRight() {
     if (result.err) {
       setLoginError(result.err);
     } else if (result.okey === true) {
+      setPending(true);
       generateAndSendCode(email);
     }
   };
@@ -99,9 +101,11 @@ export default function SigninSignupRight() {
   const checkCode = async (verifCode, displayName) => {
     if (verifCode === sentCode) {
       onLoginSubmit();
+      setPending(false);
     } else {
       setLoginError("Wrong Code");
       setIsSent(false);
+      setPending(false);
       navigate("/signin");
     }
   };
@@ -153,7 +157,13 @@ export default function SigninSignupRight() {
               required
             />
 
-            <CustomButton type="submit">GİRİŞ YAP</CustomButton>
+            {pending ? (
+              <CustomButton disabled={true} type="submit">
+                loading...
+              </CustomButton>
+            ) : (
+              <CustomButton type="submit">LOG IN</CustomButton>
+            )}
 
             {loginError && (
               <p style={{ marginTop: "1rem", color: "red", fontSize: "16px" }}>

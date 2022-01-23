@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Raleway&display=swap");
+
+.card {
+  background-color: #ffebb3;
+  width: 100%;
+  height: 15rem;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  /*box-shadow: 0 0 5rem rgb(0 0 0 / 30%);*/
+  transition: 0.4s;
+  font-weight: 500;
+}
+
+.card:hover {
+  background-color: #ffe08a;
+  transform: translateY(-20px) rotate(-3deg);
+  /*box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);*/
+}
+
+.noteContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}

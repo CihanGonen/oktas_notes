@@ -14,6 +14,7 @@ export default function SigninSignupRight() {
   const [password, setPassword] = useState("");
   const [signupError, setSignupError] = useState("");
   const [verifCode, setVerifCode] = useState("");
+  const [pending, setPending] = useState(false);
 
   const [cancel, setCancel] = useState(false);
 
@@ -91,6 +92,7 @@ export default function SigninSignupRight() {
     } else if (result.emailExists === true) {
       setSignupError("This email exists");
     } else {
+      setPending(true);
       generateAndSendCode(email);
     }
   };
@@ -98,9 +100,11 @@ export default function SigninSignupRight() {
   const checkCode = async (verifCode, displayName) => {
     if (verifCode === sentCode) {
       onSignupSubmit();
+      setPending(false);
     } else {
       setSignupError("Wrong Code");
       setIsSent(false);
+      setPending(false);
       navigate("/signin");
     }
   };
@@ -152,7 +156,13 @@ export default function SigninSignupRight() {
               required
             />
 
-            <CustomButton type="submit">KAYIT OL</CustomButton>
+            {pending ? (
+              <CustomButton disabled={true} type="submit">
+                loading...
+              </CustomButton>
+            ) : (
+              <CustomButton type="submit">Kayıt Ol</CustomButton>
+            )}
 
             {signupError && (
               <p style={{ marginTop: "1rem", color: "red", fontSize: "16px" }}>

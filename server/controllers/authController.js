@@ -48,7 +48,7 @@ module.exports.signup_post = async (req, res) => {
     );
 
     //create token
-    const token = jwtGenerator(newUser.rows[0].user_id);
+    const token = jwtGenerator(newUser.rows[0]);
 
     const sendUser = {
       user_id: newUser.rows[0].user_id,
@@ -91,7 +91,7 @@ module.exports.check_login_post = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email } = req.body;
 
     const person = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,

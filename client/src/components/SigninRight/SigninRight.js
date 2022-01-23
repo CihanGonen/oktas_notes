@@ -32,10 +32,6 @@ export default function SigninSignupRight() {
 
   const onLoginSubmit = async () => {
     setLoginError("");
-    if (!email || !password) {
-      setLoginError("Lütfen tüm alanları doldurunuz");
-      return;
-    }
     const loginValues = { email, password };
     try {
       fetch("http://localhost:5000/login", {
@@ -98,7 +94,7 @@ export default function SigninSignupRight() {
     }
   };
 
-  const checkCode = async (verifCode, displayName) => {
+  const checkCode = async (verifCode) => {
     if (verifCode === sentCode) {
       onLoginSubmit();
       setPending(false);
@@ -162,7 +158,7 @@ export default function SigninSignupRight() {
                 loading...
               </CustomButton>
             ) : (
-              <CustomButton type="submit">LOG IN</CustomButton>
+              <CustomButton type="submit">Giriş Yap</CustomButton>
             )}
 
             {loginError && (
